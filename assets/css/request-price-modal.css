@@ -1,0 +1,110 @@
+/**
+ * Стили для модального окна "Запросить цену"
+ */
+
+/* Стили для кнопки "Запросить цену" */
+.request-price-button {
+    display: inline-block;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.request-price-button:hover {
+    text-decoration: none;
+}
+
+.request-price-button:focus {
+    outline: none;
+}
+
+/* Стили для модального окна */
+#requestPriceModal .modal-content {
+    border-radius: 0;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+#requestPriceModal .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    border-radius: 8px 8px 0 0;
+}
+
+#requestPriceModal .modal-title {
+    font-weight: 600;
+    color: #333;
+}
+
+#requestPriceModal .modal-body {
+    padding: 20px;
+}
+
+/* Стили для формы Contact Form 7 */
+#requestPriceModal .wpcf7-form {
+    margin: 0;
+}
+
+#requestPriceModal .wpcf7-form p {
+    margin-bottom: 15px;
+}
+
+#requestPriceModal .wpcf7-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+#requestPriceModal .wpcf7-form input[type="text"],
+#requestPriceModal .wpcf7-form input[type="email"],
+#requestPriceModal .wpcf7-form input[type="tel"],
+#requestPriceModal .wpcf7-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+#requestPriceModal .wpcf7-form input[type="text"]:focus,
+#requestPriceModal .wpcf7-form input[type="email"]:focus,
+#requestPriceModal .wpcf7-form input[type="tel"]:focus,
+#requestPriceModal .wpcf7-form textarea:focus {
+    outline: none;
+    border-color: #007cba;
+    box-shadow: 0 0 0 3px rgba(0, 124, 186, 0.1);
+}
+
+#requestPriceModal .wpcf7-form input[type="submit"] {
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Стили для контейнера кнопки "Запросить цену" для вариаций */
+.variation-request-price-container {
+    margin-top: 15px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    #requestPriceModal .modal-dialog {
+        margin: 10px;
+    }
+    
+    #requestPriceModal .modal-body {
+        padding: 15px;
+    }
+    
+    .request-price-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+} 
