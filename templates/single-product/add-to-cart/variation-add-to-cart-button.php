@@ -56,4 +56,5 @@ global $product;
 		data-product-url="<?php echo esc_attr( $product->get_permalink() ); ?>">
 		<?php echo esc_html( Call_For_Price_Form_Settings::get_option('call_for_price_button_text', __('Запросить цену', 'call-for-price-form')) ); ?>
 	</button>
-</div> 
+	<?php echo do_shortcode('[addtoany]'); ?>
+</div>

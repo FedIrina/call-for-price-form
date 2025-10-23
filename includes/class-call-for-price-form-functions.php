@@ -194,17 +194,15 @@ class Call_For_Price_Form_Functions {
         if (!$product->is_in_stock()) {
             return;
         }
-        
-        // Выводим кнопку "Запросить цену"
-        echo '<!-- Кнопка "Запросить цену" для товаров без цены -->';
-        echo '<button type="button" ';
-        echo 'class="btn btn-primary request-price-button" ';
-        echo 'data-bs-toggle="modal" ';
-        echo 'data-bs-target="#requestPriceModal" ';
-        echo 'data-product-id="' . esc_attr($product->get_id()) . '" ';
-        echo 'data-product-name="' . esc_attr($product->get_name()) . '" ';
-        echo 'data-product-url="' . esc_attr($product->get_permalink()) . '">';
-        echo esc_html(Call_For_Price_Form_Settings::get_option('call_for_price_button_text', __('Запросить цену', 'call-for-price-form')));
-        echo '</button>';
+        ?>
+        <div class="product__buttons-wrapper">
+        <!-- Кнопка "Запросить цену" для товаров без цены -->
+            <button type="button" class="btn btn-primary request-price-button" data-bs-toggle="modal" data-bs-target="#requestPriceModal" data-product-id="<?php echo esc_attr($product->get_id()); ?>" 
+            data-product-name="<?php echo esc_attr($product->get_name()); ?>" data-product-url="<?php echo esc_attr($product->get_permalink()) ; ?>">
+            <?php echo esc_html(Call_For_Price_Form_Settings::get_option('call_for_price_button_text', __('Запросить цену', 'call-for-price-form'))) ?>
+            </button>
+        <?php echo do_shortcode('[addtoany]'); ?>
+        </div>
+        <?php
     }
 } 
