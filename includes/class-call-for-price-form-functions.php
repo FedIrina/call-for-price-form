@@ -74,7 +74,7 @@ class Call_For_Price_Form_Functions {
         $modal_title = Call_For_Price_Form_Settings::get_option('call_for_price_modal_title', __('Запросить цену', 'call-for-price-form'));
         
         echo '<div class="modal fade" id="requestPriceModal" tabindex="-1" aria-labelledby="requestPriceModalLabel" aria-hidden="true">';
-        echo '<div class="modal-dialog">';
+        echo '<div class="modal-dialog modal-dialog-centered">';
         echo '<div class="modal-content">';
         echo '<div class="modal-header">';
         echo '<h5 class="modal-title" id="requestPriceModalLabel">' . esc_html($modal_title) . '</h5>';
@@ -84,7 +84,7 @@ class Call_For_Price_Form_Functions {
         
         // Выводим форму Contact Form 7
         if (function_exists('wpcf7_contact_form')) {
-            echo do_shortcode('[contact-form-7 id="' . $form_id . '"]');
+            echo do_shortcode('[contact-form-7 id="' . $form_id . '" html_class="form-default"]');
         }
         
         echo '</div>';
