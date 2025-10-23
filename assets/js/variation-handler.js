@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             
             if (requestPriceContainer) {
-                requestPriceContainer.style.display = "block";
+                requestPriceContainer.style.display = "flex";
             }
         }
     }

@@ -25,7 +25,7 @@ class Call_For_Price_Form_Templates {
     public function locate_template($template, $template_name, $template_path) {
         // Проверяем, нужны ли нам эти шаблоны
         $custom_templates = array(
-            /* 'single-product/add-to-cart/simple.php', */
+            'single-product/add-to-cart/simple.php',
             'single-product/add-to-cart/variation-add-to-cart-button.php'
         );
         

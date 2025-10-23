@@ -15,7 +15,7 @@ class Call_For_Price_Form_Settings {
      */
     public function __construct() {
         add_action('admin_menu', array($this, 'add_settings_page'));
-        add_action('admin_init', array($this, 'init_settings'));
+        //add_action('admin_init', array($this, 'init_settings'));
         add_filter('woocommerce_settings_tabs_array', array($this, 'add_settings_tab'), 50);
         add_action('woocommerce_settings_tabs_call_for_price_form', array($this, 'settings_tab'));
         add_action('woocommerce_update_options_call_for_price_form', array($this, 'update_settings'));
