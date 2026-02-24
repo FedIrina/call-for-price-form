@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (price) {
             // Есть цена - показываем кнопку "В корзину"
             if (addToCartButton) {
-                addToCartButton.style.display = "inline-block";
+                addToCartButton.style.display = "";
                 const priceSpan = addToCartButton.querySelector(".variation-price");
                 if (priceSpan) {
                     priceSpan.innerHTML = price;
