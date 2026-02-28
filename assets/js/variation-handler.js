@@ -4,6 +4,7 @@
  */
 document.addEventListener("DOMContentLoaded", function() {
     var requestPriceContainerTimeout = null;
+    var addToCartButtonTimeout = null;
 
     // Переключение видимости кнопок: "Добавить в корзину" / "Запросить цену"
     function updateButtonVisibility(showAddToCart, formElement = null) {
@@ -17,10 +18,17 @@ document.addEventListener("DOMContentLoaded", function() {
             clearTimeout(requestPriceContainerTimeout);
             requestPriceContainerTimeout = null;
         }
+        if (addToCartButtonTimeout) {
+            clearTimeout(addToCartButtonTimeout);
+            addToCartButtonTimeout = null;
+        }
         
         if (showAddToCart) {
             if (addToCartButton) {
-                addToCartButton.style.display = "";
+                addToCartButtonTimeout = setTimeout(function() {
+                    addToCartButton.style.display = "";
+                    addToCartButtonTimeout = null;
+                }, 250);
             }
             if (requestPriceContainer) {
                 requestPriceContainer.style.display = "none";
