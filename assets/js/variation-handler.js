@@ -3,8 +3,6 @@
  * Только переключение видимости кнопок. Вывод цены на кнопке — зона ответственности темы.
  */
 document.addEventListener("DOMContentLoaded", function() {
-    var requestPriceContainerTimeout = null;
-
     // Переключение видимости кнопок: "Добавить в корзину" / "Запросить цену"
     function updateButtonVisibility(showAddToCart, formElement = null) {
         const form = formElement || document.querySelector(".variations_form");
@@ -14,11 +12,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const requestPriceContainer = document.querySelector(".variation-request-price-container");
         const addToCartWrap = form.querySelector(".woocommerce-variation-add-to-cart");
         const addToAnyInAddToCart = addToCartWrap ? addToCartWrap.querySelector(".addtoany_shortcode") : null;
-        
-        if (requestPriceContainerTimeout) {
-            clearTimeout(requestPriceContainerTimeout);
-            requestPriceContainerTimeout = null;
-        }
         
         if (showAddToCart) {
             if (addToCartWrap) {
@@ -44,10 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 addToAnyInAddToCart.style.display = "none";
             }
             if (requestPriceContainer) {
-                requestPriceContainerTimeout = setTimeout(function() {
-                    requestPriceContainer.style.display = "flex";
-                    requestPriceContainerTimeout = null;
-                }, 0);
+                requestPriceContainer.style.display = "flex";
             }
         }
     }
