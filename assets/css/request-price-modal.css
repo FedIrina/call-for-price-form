@@ -46,6 +46,9 @@
     margin-top: 15px;
 }
 
+.woocommerce-variation-add-to-cart-disabled .addtoany_shortcode {
+    display: none;
+}
 
 
 /* Адаптивность */

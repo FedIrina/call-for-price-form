@@ -4,7 +4,6 @@
  */
 document.addEventListener("DOMContentLoaded", function() {
     var requestPriceContainerTimeout = null;
-    var addToCartButtonTimeout = null;
 
     // Переключение видимости кнопок: "Добавить в корзину" / "Запросить цену"
     function updateButtonVisibility(showAddToCart, formElement = null) {
@@ -13,35 +12,42 @@ document.addEventListener("DOMContentLoaded", function() {
         
         const addToCartButton = form.querySelector(".single_add_to_cart_button");
         const requestPriceContainer = document.querySelector(".variation-request-price-container");
+        const addToCartWrap = form.querySelector(".woocommerce-variation-add-to-cart");
+        const addToAnyInAddToCart = addToCartWrap ? addToCartWrap.querySelector(".addtoany_shortcode") : null;
         
         if (requestPriceContainerTimeout) {
             clearTimeout(requestPriceContainerTimeout);
             requestPriceContainerTimeout = null;
         }
-        if (addToCartButtonTimeout) {
-            clearTimeout(addToCartButtonTimeout);
-            addToCartButtonTimeout = null;
-        }
         
         if (showAddToCart) {
+            if (addToCartWrap) {
+                addToCartWrap.classList.remove("woocommerce-variation-add-to-cart-disabled");
+            }
+            if (addToAnyInAddToCart) {
+                addToAnyInAddToCart.style.display = "";
+            }
             if (addToCartButton) {
-                addToCartButtonTimeout = setTimeout(function() {
-                    addToCartButton.style.display = "";
-                    addToCartButtonTimeout = null;
-                }, 250);
+                addToCartButton.style.display = "";
             }
             if (requestPriceContainer) {
                 requestPriceContainer.style.display = "none";
             }
         } else {
+            if (addToCartWrap) {
+                addToCartWrap.classList.add("woocommerce-variation-add-to-cart-disabled");
+            }
             if (addToCartButton) {
                 addToCartButton.style.display = "none";
+            }
+            if (addToAnyInAddToCart) {
+                addToAnyInAddToCart.style.display = "none";
             }
             if (requestPriceContainer) {
                 requestPriceContainerTimeout = setTimeout(function() {
                     requestPriceContainer.style.display = "flex";
                     requestPriceContainerTimeout = null;
-                }, 300);
+                }, 0);
             }
         }
     }
@@ -60,10 +66,9 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
         
-        // Обработчик изменения вариации
-        $(document).on("found_variation", ".variations_form", function(event, variation) {
-            const hasPrice = variation && (variation.display_price && variation.display_price > 0);
-            updateButtonVisibility(hasPrice, this);
+        // Обработчик изменения вариации (show_variation — тот же, что у WooCommerce для класса woocommerce-variation-add-to-cart-disabled)
+        $(document).on("show_variation", ".variations_form", function(event, variation, purchasable) {
+            updateButtonVisibility(purchasable, this);
         }); 
         
         // Обработчик сброса вариации
