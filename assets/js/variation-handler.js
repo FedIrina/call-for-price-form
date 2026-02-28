@@ -1,36 +1,39 @@
 /**
  * Обработка вариаций товаров для функциональности "Запросить цену"
+ * Только переключение видимости кнопок. Вывод цены на кнопке — зона ответственности темы.
  */
 document.addEventListener("DOMContentLoaded", function() {
-    // Функция для обновления текста кнопки
-    function updateButtonText(price, formElement = null) {
+    var requestPriceContainerTimeout = null;
+
+    // Переключение видимости кнопок: "Добавить в корзину" / "Запросить цену"
+    function updateButtonVisibility(showAddToCart, formElement = null) {
         const form = formElement || document.querySelector(".variations_form");
         if (!form) return;
         
         const addToCartButton = form.querySelector(".single_add_to_cart_button");
         const requestPriceContainer = document.querySelector(".variation-request-price-container");
         
-        if (price) {
-            // Есть цена - показываем кнопку "В корзину"
+        if (requestPriceContainerTimeout) {
+            clearTimeout(requestPriceContainerTimeout);
+            requestPriceContainerTimeout = null;
+        }
+        
+        if (showAddToCart) {
             if (addToCartButton) {
                 addToCartButton.style.display = "";
-                const priceSpan = addToCartButton.querySelector(".variation-price");
-                if (priceSpan) {
-                    priceSpan.innerHTML = price;
-                }
             }
-            
             if (requestPriceContainer) {
                 requestPriceContainer.style.display = "none";
             }
         } else {
-            // Нет цены - показываем кнопку "Запросить цену"
             if (addToCartButton) {
                 addToCartButton.style.display = "none";
             }
-            
             if (requestPriceContainer) {
-                requestPriceContainer.style.display = "flex";
+                requestPriceContainerTimeout = setTimeout(function() {
+                    requestPriceContainer.style.display = "flex";
+                    requestPriceContainerTimeout = null;
+                }, 300);
             }
         }
     }
@@ -45,30 +48,24 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             
             $(".variations_form").each(function() {
-                updateButtonText(null, this);
+                updateButtonVisibility(false, this);
             });
         }
         
         // Обработчик изменения вариации
         $(document).on("found_variation", ".variations_form", function(event, variation) {
             const hasPrice = variation && (variation.display_price && variation.display_price > 0);
-            
-            if (hasPrice) {
-                const priceToShow = variation.price_html || variation.price || variation.display_price;
-                updateButtonText(priceToShow, this);
-            } else {
-                updateButtonText(null, this);
-            }
+            updateButtonVisibility(hasPrice, this);
         }); 
         
         // Обработчик сброса вариации
         $(document).on("reset_data", "form.variations_form", function() {
-            updateButtonText(null, this);
+            updateButtonVisibility(false, this);
         });
         
         // Обработчик скрытия вариации
         $(document).on("hide_variation", "form.variations_form", function() {
-            updateButtonText(null, this);
+            updateButtonVisibility(false, this);
         });
     });
 });
